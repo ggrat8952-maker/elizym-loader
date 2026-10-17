@@ -20,12 +20,21 @@ jobs:
           mkdir -p app/src/main/res/layout
           mkdir -p app/src/main/res/values
 
-      - name: Build with Android Build Tools
+      - name: Move Files
         run: |
-          # Автоматическая генерация минимального Gradle проекта для сборки
-          echo "plugins { id 'com.android.application' }" > build.gradle
-          echo "pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }" > settings.gradle
-          
-          # Запуск компиляции (симуляция)
-          echo "Проект подготовлен к автоматической сборке в облаке."
+          # Перемещаем созданные нами файлы в нужные папки для сборщика
+          [ -f activity_main.xml ] && mv activity_main.xml app/src/main/res/layout/ || true
+          [ -f MainActivity.java ] && mv MainActivity.java app/src/main/java/com/elizym/id/ || true
+          [ -f floatingservice.java ] && mv floatingservice.java app/src/main/java/com/elizym/id/ || true
+
+      - name: Create Zip Archive
+        run: |
+          # Упаковываем все исходники интерфейса и логики в готовый ZIP-архив
+          zip -r elizym_source_project.zip app/
+
+      - name: Upload Finished Project
+        uses: actions/upload-artifact@v4
+        with:
+          name: elizym-app-project
+          path: elizym_source_project.zip
           

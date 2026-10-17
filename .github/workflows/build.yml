@@ -14,27 +14,38 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Create Project Structure
+      - name: Setup Gradle Project
         run: |
+          # Создаем структуру папок
           mkdir -p app/src/main/java/com/elizym/id
           mkdir -p app/src/main/res/layout
           mkdir -p app/src/main/res/values
 
-      - name: Move Files
-        run: |
-          # Перемещаем созданные нами файлы в нужные папки для сборщика
-          [ -f activity_main.xml ] && mv activity_main.xml app/src/main/res/layout/ || true
-          [ -f MainActivity.java ] && mv MainActivity.java app/src/main/java/com/elizym/id/ || true
-          [ -f floatingservice.java ] && mv floatingservice.java app/src/main/java/com/elizym/id/ || true
+          # Перемещаем файлы, если они в корне
+          [ -f activity_main.xml ] && mv activity_main.xml app/src/main/res/layout/activity_main.xml || true
+          [ -f MainActivity.java ] && mv MainActivity.java app/src/main/java/com/elizym/id/MainActivity.java || true
+          [ -f floatingservice.java ] && mv floatingservice.java app/src/main/java/com/elizym/id/floatingservice.java || true
+          [ -f AndroidManifest.xml ] && mv AndroidManifest.xml app/src/main/AndroidManifest.xml || true
 
-      - name: Create Zip Archive
-        run: |
-          # Упаковываем все исходники интерфейса и логики в готовый ZIP-архив
-          zip -r elizym_source_project.zip app/
+          # Генерируем конфигурационные файлы Gradle
+          echo "pluginManagement { repositories { google(); mavenCentral(); gradlePluginPortal() } }; dependencyResolutionManagement { repositoriesMode.set(android.view.dependencyResolutionManagement.RepositoriesMode.FAIL_ON_PROJECT_REPOS); repositories { google(); mavenCentral() } }; rootProject.name = 'elizym'" > settings.gradle
+          
+          echo "plugins { id 'com.android.application' }" > build.gradle
+          
+          echo "plugins { id 'com.android.application' version '8.2.2' apply false }" > app/build.gradle
+          echo -e "plugins { id 'com.android.application' }\nandroid { namespace 'com.elizym.id'\ncompileSdk 34\ndefaultConfig { applicationId 'com.elizym.id'\nminSdk 26\ntargetSdk 34\nversionCode 1\nversionName '2.0' }\nbuildTypes { release { minifyEnabled false } } }" > app/build.gradle
 
-      - name: Upload Finished Project
+          # Инициализируем Gradle Wrapper для сборки
+          gradle wrapper --gradle-version 8.2
+
+      - name: Compile APK with Gradle
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload Finished APK
         uses: actions/upload-artifact@v4
         with:
-          name: elizym-app-project
-          path: elizym_source_project.zip
+          name: elizym-apk-file
+          path: app/build/outputs/apk/debug/app-debug.apk
           

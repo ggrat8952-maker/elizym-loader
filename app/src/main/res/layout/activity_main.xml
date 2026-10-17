@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://android.com"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A0C"
+    android:padding="20dp">
+
+    <!-- ГЛАВНЫЙ ЭКРАН ЗАГРУЗКИ (LOAD) -->
+    <LinearLayout
+        android:id="@+id/panel_load"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/logo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Elizym"
+            android:textColor="#A832FC"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="40dp"/>
+
+        <LinearLayout
+            android:id="@+id/card_build"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1C1C1E"
+            android:padding="15dp"
+            android:layout_marginBottom="25dp">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BUILD"
+                android:textColor="#8E8E93"
+                android:textSize="12sp"
+                android:layout_marginBottom="8dp"/>
+
+            <Spinner
+                android:id="@+id/spinner_build"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@android:color/transparent"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/card_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#1C1C1E"
+            android:padding="15dp"
+            android:layout_marginBottom="40dp">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="Ready"
+                android:textColor="#34C759"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/button_load"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="#A832FC"
+            android:text="Load cheat"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- ЭКРАН ИНФОРМАЦИИ (INFO) -->
+    <LinearLayout
+        android:id="@+id/panel_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="40dp"/>
+
+        <LinearLayout
+            android:id="@+id/card_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1C1C1E"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Developer\n@BPEMEC\n"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Community\nt.me/elizym.cc\n"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Version\n2.0"
+                android:textColor="#8E8E93"
+                android:textSize="14sp"
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ЭКРАН НАСТРОЕК (SETTINGS) -->
+    <LinearLayout
+        android:id="@+id/panel_settings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottom_navigation"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Settings"
+            android:textColor="#FFFFFF"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="40dp"/>
+
+        <LinearLayout
+            android:id="@+id/card_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1C1C1E"
+            android:padding="15dp">
+
+            <CheckBox
+                android:id="@+id/switch_language"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="English Language"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="15dp"/>
+
+            <CheckBox
+                android:id="@+id/switch_ui"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Use Old UI Style"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- НИЖНИЙ БАР НАВИГАЦИИ (iOS STYLE) -->
+    <LinearLayout
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:background="#1C1C1E"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tab_load"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Load"
+            android:textColor="#A832FC"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tab_info"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Info"
+            android:textColor="#8E8E93"
+            android:textSize="14sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/tab_settings"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Settings"
+            android:textColor="#8E8E93"
+            android:textSize="14sp"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</RelativeLayout>
+      
